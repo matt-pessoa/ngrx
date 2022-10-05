@@ -22,12 +22,26 @@ export class FormModalAlunoComponent {
   pendentes!: IFormulariosPendentes[];
   activatedSubscription!: Subscription;
   done = new Subject();
+  formTranslate!: any[];
 
   constructor(private modalService: NgbModal, private store: Store<any>) {}
 
-  // createControlledForm(formularios: IFormulariosPendentes[]) {
+  createControlledForm(formulariosPendentes: IFormulariosPendentes[]) {
+    this.formTranslate = formulariosPendentes.map(({ formulario }: any) => {
+      return formulario.perguntas.map((p: any) => {
+        return {
+          label: p.enunciado,
+          value: '',
+          type: p.tipoPergunta,
+          validators: {
+            required: p.obrigatoria,
+          },
+        };
+      });
+    });
 
-  // }
+    return this.formTranslate;
+  }
 
   loadModal(formulariosPendentes: any) {
     if (formulariosPendentes && formulariosPendentes.length > 0) {
@@ -41,7 +55,6 @@ export class FormModalAlunoComponent {
     this.activatedSubscription = this.pendentes$
       .pipe(takeUntil(this.done))
       .subscribe((data) => {
-        console.log(data);
         this.loadModal(data);
       });
   }
