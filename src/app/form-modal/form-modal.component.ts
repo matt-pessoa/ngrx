@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnDestroy } from '@angular/core';
+import { Component, Injectable, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { map, Subject, Subscription, takeUntil } from 'rxjs';
@@ -57,8 +57,7 @@ export class FormModalAlunoComponent {
   loadModal(formulariosPendentes: any) {
     if (formulariosPendentes && formulariosPendentes.length > 0) {
       const modalRef = this.modalService.open(NgbdModalAlunoContentComponent);
-      console.log(this.createControlledForm(formulariosPendentes));
-      // modalRef.componentInstance.formulariosPendentes = formulariosPendentes;
+      modalRef.componentInstance.formulariosPendentes = formulariosPendentes;
     }
   }
 

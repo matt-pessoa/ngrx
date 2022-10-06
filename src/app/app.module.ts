@@ -7,11 +7,19 @@ import { MainComponent } from './main/main.component';
 import { CoreModule } from './core/core.module';
 import { appReducer } from './store/app.state';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormModalAlunoComponent } from './form-modal/form-modal.component';
+import {
+  FormModalAlunoComponent,
+  NgbdModalAlunoContentComponent,
+} from './form-modal/form-modal.component';
 import { DynamicFormComponent } from './form-modal/dynamic-form/dynamic-form.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, DynamicFormComponent],
+  declarations: [
+    AppComponent,
+    MainComponent,
+    NgbdModalAlunoContentComponent,
+    DynamicFormComponent,
+  ],
   imports: [
     BrowserModule,
     StoreModule.forRoot({ app: appReducer }),
