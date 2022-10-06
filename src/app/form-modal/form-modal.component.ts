@@ -9,7 +9,7 @@ import { IFormulariosPendentes } from '../store/app.state';
   templateUrl: './form-modal.component.html',
 })
 export class NgbdModalAlunoContentComponent {
-  @Input() title!: string;
+  @Input() formulariosPendentes!: IFormulariosPendentes[];
 
   constructor(public activeModal: NgbActiveModal) {}
 }
@@ -26,13 +26,24 @@ export class FormModalAlunoComponent {
 
   constructor(private modalService: NgbModal, private store: Store<any>) {}
 
+  translateTipoPergunta(tipoPergunta: string) {
+    if (tipoPergunta === 'ESCALA') {
+      return 'range';
+    } else if (tipoPergunta === 'BINARIO') {
+      return 'text';
+    } else {
+      return 'text';
+    }
+  }
+
   createControlledForm(formulariosPendentes: IFormulariosPendentes[]) {
     this.formTranslate = formulariosPendentes.map(({ formulario }: any) => {
       return formulario.perguntas.map((p: any) => {
         return {
+          id: p.numero,
           label: p.enunciado,
           value: '',
-          type: p.tipoPergunta,
+          type: this.translateTipoPergunta(p.tipoPergunta),
           validators: {
             required: p.obrigatoria,
           },
@@ -46,8 +57,8 @@ export class FormModalAlunoComponent {
   loadModal(formulariosPendentes: any) {
     if (formulariosPendentes && formulariosPendentes.length > 0) {
       const modalRef = this.modalService.open(NgbdModalAlunoContentComponent);
-      modalRef.componentInstance.title =
-        formulariosPendentes[0].formulario.nome;
+      console.log(this.createControlledForm(formulariosPendentes));
+      // modalRef.componentInstance.formulariosPendentes = formulariosPendentes;
     }
   }
 

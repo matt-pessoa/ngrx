@@ -56,7 +56,7 @@ export const appInitialState: IAppState = {
           {
             enunciado: 'Discorra?',
             id: 2604400,
-            numero: 1,
+            numero: 2,
             obrigatoria: false,
             tipoPergunta: 'TEXTO',
           },
