@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IFormulariosPendentes } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dynamic-form.component.css'],
 })
 export class DynamicFormComponent implements OnInit {
+  @Input() formulariosPendentes!: IFormulariosPendentes[];
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.formulariosPendentes);
+  }
 }
