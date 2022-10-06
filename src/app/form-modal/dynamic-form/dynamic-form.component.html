@@ -2,13 +2,15 @@
   <h1>{{ formulario!.nome }}</h1>
 
   <ng-container *ngFor="let pergunta of perguntas">
-    <ng-container [ngSwitch]="pergunta.tipoPergunta">
+    <div class="column">
       <label>{{ pergunta.enunciado }}</label>
-      <!-- ESCALA -->
-      <input *ngSwitchCase="'ESCALA'" type="radio" />
+      <ng-container [ngSwitch]="pergunta.tipoPergunta">
+        <!-- ESCALA -->
+        <input *ngSwitchCase="'ESCALA'" type="radio" />
 
-      <!-- TEXTO -->
-      <input *ngSwitchCase="'BINARIO'" type="text" />
-    </ng-container>
+        <!-- TEXTO -->
+        <input *ngSwitchCase="'BINARIO'" type="text" />
+      </ng-container>
+    </div>
   </ng-container>
 </ng-container>
