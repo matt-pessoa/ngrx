@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
 import { DataService } from '../core/data.service';
 import { FormModalAlunoComponent } from '../form-modal/form-modal.component';
 import { IAppState, IFormulariosPendentes, setForm } from '../store/app.state';

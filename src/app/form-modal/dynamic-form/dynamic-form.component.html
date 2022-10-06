@@ -1,5 +1,5 @@
 <ng-container>
-  <h1>{{ formulario!.nome }}</h1>
+  <h1>{{ formularioAtual!.formulario!.nome }}</h1>
 
   <ng-container *ngFor="let pergunta of perguntas">
     <div class="column">
@@ -13,4 +13,9 @@
       </ng-container>
     </div>
   </ng-container>
+  <!-- Ao clicar, deve disparar uma action para remover o atual formulario do redux -->
+  <!-- Também deve chamar a função para verificar a existência de outros formularios pendentes -->
+  <!-- Nesta aplicação, vai verificar o Redux e na Gama, deve verificar/atualizar o BD -->
 </ng-container>
+
+<!-- IMPEDIR DE CLICAR FORA DO MODAL -->

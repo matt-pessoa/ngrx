@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map, Subject, Subscription, takeUntil } from 'rxjs';
 import {
-  IFormulario,
+  IAppState,
   IFormulariosPendentes,
   IPergunta,
+  setForm,
 } from 'src/app/store/app.state';
 
 @Component({
@@ -11,15 +14,32 @@ import {
   styleUrls: ['./dynamic-form.component.css'],
 })
 export class DynamicFormComponent implements OnInit {
-  @Input() formulariosPendentes!: IFormulariosPendentes;
+  @Input() formulariosPendentes!: IFormulariosPendentes[];
 
-  formulario!: IFormulario | undefined;
+  formulariosNaoEnviados!: IFormulariosPendentes[] | undefined;
+  formularioAtual!: IFormulariosPendentes | undefined;
   perguntas!: IPergunta[] | undefined;
+  pendentes$ = this.store
+    .select('app')
+    .pipe(map(({ formulariosPendentes }: any) => formulariosPendentes));
+  pendentes!: IFormulariosPendentes[];
+  activatedSubscription!: Subscription;
+  done = new Subject();
+  formTranslate!: any[];
 
-  constructor() {}
+  constructor(private store: Store<{ app: IAppState }>) {}
+
+  // getFormulariosPendentesRedux() {
+  //   this.activatedSubscription = this.pendentes$
+  //     .pipe(takeUntil(this.done))
+  //     .subscribe((data) => {
+  //       console.log(data);
+  //     });
+  // }
 
   ngOnInit(): void {
-    this.formulario = this.formulariosPendentes.formulario;
-    this.perguntas = this.formulario?.perguntas;
+    this.formulariosNaoEnviados = this.formulariosPendentes;
+    this.formularioAtual = this.formulariosPendentes[0];
+    this.perguntas = this.formularioAtual?.formulario?.perguntas;
   }
 }
