@@ -9,7 +9,7 @@ import { IFormulariosPendentes } from '../store/app.state';
   templateUrl: './form-modal.component.html',
 })
 export class NgbdModalAlunoContentComponent {
-  @Input() formulariosPendentes!: IFormulariosPendentes[];
+  @Input() formulariosPendentes!: IFormulariosPendentes;
 
   constructor(public activeModal: NgbActiveModal) {}
 }
@@ -54,10 +54,10 @@ export class FormModalAlunoComponent {
     return this.formTranslate;
   }
 
-  loadModal(formulariosPendentes: any) {
+  loadModal(formulariosPendentes: IFormulariosPendentes[]) {
     if (formulariosPendentes && formulariosPendentes.length > 0) {
       const modalRef = this.modalService.open(NgbdModalAlunoContentComponent);
-      modalRef.componentInstance.formulariosPendentes = formulariosPendentes;
+      modalRef.componentInstance.formulariosPendentes = formulariosPendentes[0]; //passa apenas um dos formulários pendentes
     }
   }
 

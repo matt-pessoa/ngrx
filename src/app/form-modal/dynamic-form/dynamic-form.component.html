@@ -1,1 +1,14 @@
-<p>dynamic-form works!</p>
+<ng-container>
+  <h1>{{ formulario!.nome }}</h1>
+
+  <ng-container *ngFor="let pergunta of perguntas">
+    <ng-container [ngSwitch]="pergunta.tipoPergunta">
+      <label>{{ pergunta.enunciado }}</label>
+      <!-- ESCALA -->
+      <input *ngSwitchCase="'ESCALA'" type="radio" />
+
+      <!-- TEXTO -->
+      <input *ngSwitchCase="'BINARIO'" type="text" />
+    </ng-container>
+  </ng-container>
+</ng-container>

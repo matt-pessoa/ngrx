@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IFormulariosPendentes } from 'src/app/store/app.state';
+import {
+  IFormulario,
+  IFormulariosPendentes,
+  IPergunta,
+} from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -7,11 +11,15 @@ import { IFormulariosPendentes } from 'src/app/store/app.state';
   styleUrls: ['./dynamic-form.component.css'],
 })
 export class DynamicFormComponent implements OnInit {
-  @Input() formulariosPendentes!: IFormulariosPendentes[];
+  @Input() formulariosPendentes!: IFormulariosPendentes;
+
+  formulario!: IFormulario | undefined;
+  perguntas!: IPergunta[] | undefined;
 
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.formulariosPendentes);
+    this.formulario = this.formulariosPendentes.formulario;
+    this.perguntas = this.formulario?.perguntas;
   }
 }
