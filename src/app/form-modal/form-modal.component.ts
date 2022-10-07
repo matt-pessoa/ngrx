@@ -42,34 +42,6 @@ export class FormModalAlunoComponent {
 
   constructor(private modalService: NgbModal, private store: Store<any>) {}
 
-  // translateTipoPergunta(tipoPergunta: string) {
-  //   if (tipoPergunta === 'ESCALA') {
-  //     return 'range';
-  //   } else if (tipoPergunta === 'BINARIO') {
-  //     return 'text';
-  //   } else {
-  //     return 'text';
-  //   }
-  // }
-
-  // createControlledForm(formulariosPendentes: IFormulariosPendentes[]) {
-  //   this.formTranslate = formulariosPendentes.map(({ formulario }: any) => {
-  //     return formulario.perguntas.map((p: any) => {
-  //       return {
-  //         id: p.numero,
-  //         label: p.enunciado,
-  //         value: '',
-  //         type: this.translateTipoPergunta(p.tipoPergunta),
-  //         validators: {
-  //           required: p.obrigatoria,
-  //         },
-  //       };
-  //     });
-  //   });
-
-  //   return this.formTranslate;
-  // }
-
   loadModal(formulariosPendentes: IFormulariosPendentes[]) {
     if (formulariosPendentes && formulariosPendentes.length > 0) {
       const modalRef = this.modalService.open(NgbdModalAlunoContentComponent);
@@ -82,6 +54,7 @@ export class FormModalAlunoComponent {
       .pipe(takeUntil(this.done))
       .subscribe((data) => {
         this.loadModal(data);
+        console.log(data);
       });
   }
 }
